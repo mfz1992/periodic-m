@@ -20,7 +20,7 @@ const copy = {
   profileKicker:"ELEMENT PROFILE",profileTitle:'من الذرة إلى <span>العالم</span>',
   scienceNoteTitle:"ملاحظة علمية",scienceNote:"التوزيع حسب الأغلفة هنا يوضح عدد الإلكترونات في كل غلاف للذرة المتعادلة. القيم المعروضة تعليمية، وتختلف بعض التفاصيل والكتل النظيرية باختلاف النظائر.",
   footerLine:"صُنع للتعلّم، وصُمّم للاستكشاف.",number:"العدد الذري",mass:"الكتلة الذرية",state:"الحالة",shells:"توزيع الأغلفة الإلكترونية",
-  configuration:"التوزيع الإلكتروني بالمدارات الفرعية",properties:"الخواص الفيزيائية والكيميائية",uses:"استخدامات في الحياة",about:"نبذة عن العنصر",
+  configuration:"التوزيع الإلكتروني",properties:"الخواص الفيزيائية والكيميائية",uses:"استخدامات في الحياة",about:"نبذة عن العنصر",
   period:"الدورة",group:"المجموعة",notFound:"لا توجد عناصر تطابق بحثك.",selected:"العنصر المحدد",visual:"نموذج ذري توضيحي",
   category:"العائلة الكيميائية",backToTable:"العودة إلى الجدول",prev:"العنصر السابق",next:"العنصر التالي"
  },
@@ -34,7 +34,7 @@ const copy = {
   profileKicker:"ELEMENT PROFILE",profileTitle:'From atom to <span>everyday life</span>',
   scienceNoteTitle:"Scientific note",scienceNote:"Shell distribution shows the number of electrons in each shell of a neutral atom. Values are educational; isotopic masses and some properties vary by isotope.",
   footerLine:"Made for learning. Designed for discovery.",number:"Atomic number",mass:"Atomic mass",state:"State",shells:"Electron shell distribution",
-  configuration:"Subshell electron configuration",properties:"Physical & chemical properties",uses:"Everyday applications",about:"About this element",
+  configuration:"Electron configuration",properties:"Physical & chemical properties",uses:"Everyday applications",about:"About this element",
   period:"Period",group:"Group",notFound:"No elements match your search.",selected:"Selected element",visual:"Illustrative atomic model",
   category:"Chemical family",backToTable:"Back to table",prev:"Previous element",next:"Next element"
  }
@@ -67,7 +67,7 @@ function renderTable(){
   if(!shown.length){grid.innerHTML=`<div class="empty-state">${tr("notFound")}</div>`;return;}
   grid.innerHTML=shown.map(el=>{
     const meta=categoryMeta[el.cat];
-    return `<button class="element-tile ${el.n===state.selected?"active":""}" style="--el-color:${meta.color};grid-column:${el.group};grid-row:${el.period}" data-n="${el.n}" aria-label="${el.s} ${state.lang==="ar"?el.ar:el.en}" aria-pressed="${el.n===state.selected}">
+    return `<button class="element-tile ${el.n===state.selected?"active":""}" style="--el-color:${meta.color};grid-column:${el.col || (el.group <= 2 ? el.group : el.group - 10)};grid-row:${el.period}" data-n="${el.n}" aria-label="${el.s} ${state.lang==="ar"?el.ar:el.en}" aria-pressed="${el.n===state.selected}">
       <span class="tile-number">${el.n}</span><span class="tile-symbol">${el.s}</span>
       <span class="tile-name">${state.lang==="ar"?el.ar:el.en}</span><span class="tile-mass">${el.mass}</span></button>`;
   }).join("");
@@ -113,7 +113,6 @@ function renderDetail(){
       </div>
       <div class="detail-block"><h3>${tr("about")}</h3><p>${desc}</p></div>
       <div class="detail-block"><h3>${tr("shells")}</h3><div class="shells">${el.shells.map((num,i)=>`<span class="shell-pill">${state.lang==="ar"?"الغلاف":"Shell"} ${i+1}: ${num} e⁻</span>`).join("")}</div></div>
-      <div class="detail-block"><h3>${tr("configuration")}</h3><div class="detail-config">${el.config}</div></div>
       <div class="detail-block"><h3>${tr("properties")}</h3><p>${props}</p></div>
       <div class="detail-block"><h3>${tr("uses")}</h3><p>${uses}</p></div>
       <span class="detail-tag"><i class="legend-swatch" style="background:${meta.color}"></i>${tr("category")}: ${meta[state.lang]}</span>
@@ -135,6 +134,24 @@ document.addEventListener("keydown",e=>{
   if(e.key==="ArrowLeft"&&document.activeElement.tagName!=="INPUT")changeElement(state.lang==="ar"?1:-1);
   if(e.key==="ArrowRight"&&document.activeElement.tagName!=="INPUT")changeElement(state.lang==="ar"?-1:1);
 });
+// Local-only command pad: safe, deterministic actions; no system commands are executed.
+function runLocalCommand(){
+  const input=$("commandInput"), output=$("commandOutput");
+  const value=input.value.trim();
+  if(!value){output.textContent=state.lang==="ar"?"اكتب أمرًا أو ملاحظة أولًا.":"Type a command or note first.";output.classList.add("is-visible");return;}
+  const normalized=value.toLowerCase().replace(/[.!?؟،]+$/g,"").trim();
+  if(normalized==="who is the best teacher"){
+    output.textContent=state.lang==="ar"?"الأستاذة عزوزي شهرة":"Ms. Azzouzi Chahra";
+    output.classList.add("is-visible","is-special");
+  }else{
+    output.textContent=(state.lang==="ar"?"ملاحظتك: ":"Your note: ")+value;
+    output.classList.add("is-visible");output.classList.remove("is-special");
+  }
+}
+if($("runCommand")) $("runCommand").addEventListener("click",runLocalCommand);
+if($("clearCommand")) $("clearCommand").addEventListener("click",()=>{$("commandInput").value="";$("commandOutput").textContent="";$("commandOutput").classList.remove("is-visible","is-special");$("commandInput").focus();});
+if($("commandInput")) $("commandInput").addEventListener("keydown",e=>{if(e.key==="Enter")runLocalCommand();});
+
 fetch("assets/elements.json").then(r=>{if(!r.ok)throw new Error("Could not load element data");return r.json();}).then(data=>{
   elements=data;renderLegend();renderTable();renderDetail();
 }).catch(err=>{

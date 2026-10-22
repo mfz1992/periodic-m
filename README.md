@@ -1,6 +1,6 @@
 # Periodic M
 
-A responsive bilingual (Arabic/English) educational periodic-table website for the first three periods (18 main-group elements).
+A responsive bilingual (Arabic/English) educational periodic-table website for the first three periods (18 main-group elements). This refined version adds clearer responsive spacing, accurate IUPAC group numbers, a local notes/command pad, and the teacher-credit footer.
 
 ## Run locally
 Because the website fetches `assets/elements.json`, serve the folder over HTTP rather than opening `index.html` directly.
@@ -25,7 +25,8 @@ Recommended easy option: GitHub Pages (static hosting).
 If you prefer a deployment service that does not require a public repository, check its current free plan and terms before uploading.
 
 ## Content notes
-- This is deliberately the simplified first-three-periods table (18 elements arranged in 8 main-group columns), not the full 118-element table.
+- This is deliberately the simplified first-three-periods table (18 elements arranged in 8 visible main-group columns), not the full 118-element table. Element profiles use IUPAC group numbers (1, 2, 13–18).
 - Atomic masses are standard abridged values for classroom use; many values are representative standard atomic weights, not isotope-specific masses.
 - The atom drawing is a schematic Bohr-style illustration and is not a literal scale model.
+- The notes/command pad runs in the browser only; it does not execute system commands or send input to a server. The phrase `who is the best teacher` reveals the teacher-credit easter egg. The interface focuses on electron shells and does not display subshell configuration in the element profile.
 - Review scientific content against your course textbook before classroom presentation.
