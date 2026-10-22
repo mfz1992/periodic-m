@@ -47,7 +47,7 @@
 
     <section class="workspace">
       <div class="section-heading">
-        <div><div class="section-kicker" data-i18n="exploreKicker">INTERACTIVE PERIODIC TABLE</div><h2 data-i18n="tableTitle">الجدول الدوري <span>المبسّط</span></h2></div>
+        <div><div class="section-kicker" data-i18n="exploreKicker">INTERACTIVE PERIODIC TABLE</div><h2 data-i18n-html="tableTitle">الجدول الدوري <span>المبسّط</span></h2></div>
         <div class="table-note"><span class="note-dot"></span><span data-i18n="tableNote">اضغط على أي عنصر لاستكشافه</span></div>
       </div>
       <div class="table-controls">
@@ -64,17 +64,28 @@
 
     <section class="detail-section" id="detailSection">
       <div class="section-heading detail-heading">
-        <div><div class="section-kicker" data-i18n="profileKicker">ELEMENT PROFILE</div><h2 data-i18n="profileTitle">من الذرة إلى <span>العالم</span></h2></div>
+        <div><div class="section-kicker" data-i18n="profileKicker">ELEMENT PROFILE</div><h2 data-i18n-html="profileTitle">من الذرة إلى <span>العالم</span></h2></div>
         <div class="detail-arrows"><button id="prevElement" aria-label="Previous element">←</button><button id="nextElement" aria-label="Next element">→</button></div>
       </div>
       <article id="elementDetail" class="detail-card" aria-live="polite"></article>
     </section>
 
-    <section class="bottom-note">
+    <section class="command-section" aria-labelledby="commandTitle">
+    <div class="command-heading">
+      <div><div class="section-kicker" data-i18n="labKicker">LOCAL COMMAND PAD</div><h2 id="commandTitle" data-i18n="labTitle">ملاحظات وأوامر</h2></div>
+      <span class="command-badge"><i></i> <span data-i18n="labStatus">LOCAL ONLY</span></span>
+    </div>
+    <p class="command-description" data-i18n="labDesc">اكتب أمرًا أو ملاحظة قصيرة ثم اضغط تنفيذ. جرّب الأمر السري 😉</p>
+    <div class="command-controls"><input id="commandInput" type="text" autocomplete="off" placeholder="اكتب الأمر هنا..." data-i18n-placeholder="labPlaceholder" aria-label="Command or note"><button id="runCommand" type="button" data-i18n="runCommand">تنفيذ</button><button id="clearCommand" class="command-clear" type="button" data-i18n="clearCommand">مسح</button></div>
+    <p class="command-hint" data-i18n="commandHint">تلميح: الأوامر تُنفّذ محليًا داخل هذه الصفحة فقط.</p>
+    <div id="commandOutput" class="command-output" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="bottom-note">
       <div class="note-symbol">i</div><div><strong data-i18n="scienceNoteTitle">ملاحظة علمية</strong><p data-i18n="scienceNote">التوزيع حسب الأغلفة هنا يوضح عدد الإلكترونات في كل غلاف للذرة المتعادلة. القيم المعروضة تعليمية، وتختلف بعض التفاصيل والكتل النظيرية باختلاف النظائر.</p></div>
     </section>
   </main>
-  <footer class="footer"><a class="footer-brand" href="#"><span class="brand-mark small">P<span>M</span></span><span>PERIODIC M</span></a><span data-i18n="footerLine">صُنع للتعلّم، وصُمّم للاستكشاف.</span><span class="made-by">MADE BY <b>MFZ</b> <i>✳</i></span></footer>
+  <footer class="footer"><a class="footer-brand" href="#"><span class="brand-mark small">P<span>M</span></span><span>PERIODIC M</span></a><span data-i18n="footerLine">صُنع للتعلّم، وصُمّم للاستكشاف.</span><div class="footer-credits"><span class="made-by">MADE BY <b>MFZ</b> <i>✳</i></span><span class="teacher-credit" data-i18n="teacherCredit">تحت إشراف الأستاذة عزوزي شهرة</span></div></footer>
   <script src="app.js"></script>
 </body>
 </html>
