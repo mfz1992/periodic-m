@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Periodic M — جدول دوري مبسّط وتفاعلي، مع التوزيع الإلكتروني وخواص العناصر.">
+  <title>Periodic M | الجدول الدوري التفاعلي</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Periodic M home">
+      <span class="brand-mark">P<span>M</span></span>
+      <span class="brand-name">Periodic <b>M</b><small>CHEMISTRY EXPLORER</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="live-dot"></span><span class="edition" data-i18n="edition">الجدول المبسّط · أول 3 دورات</span>
+      <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language">EN <span>↗</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="eyebrow">اكتشف عالم العناصر</span></div>
+        <h1 data-i18n-html="heroTitle">كل عنصر له<br><em>قصة ذرّية.</em></h1>
+        <p class="hero-description" data-i18n="heroDesc">استكشف أول ثلاث دورات من الجدول الدوري، وتعرّف على بنية الذرة وتوزيع إلكتروناتها وخصائصها.</p>
+        <div class="hero-stats">
+          <div><strong>18</strong><span data-i18n="statElements">عنصرًا تفاعليًا</span></div>
+          <i></i>
+          <div><strong>03</strong><span data-i18n="statPeriods">دورات معروضة</span></div>
+          <i></i>
+          <div><strong>08</strong><span data-i18n="statGroups">مجموعات رئيسية</span></div>
+        </div>
+      </div>
+      <div class="atom-art" aria-hidden="true">
+        <div class="atom-glow"></div><div class="orbit orbit-one"><span class="electron e-one"></span></div>
+        <div class="orbit orbit-two"><span class="electron e-two"></span></div><div class="orbit orbit-three"><span class="electron e-three"></span></div>
+        <div class="nucleus"><span>p+</span><span>n°</span><span>p+</span><span>n°</span></div>
+        <span class="atom-label label-top">ELECTRON CLOUD <b>01</b></span>
+        <span class="atom-label label-bottom">ATOMIC STRUCTURE <b>PM / LAB</b></span>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="section-heading">
+        <div><div class="section-kicker" data-i18n="exploreKicker">INTERACTIVE PERIODIC TABLE</div><h2 data-i18n-html="tableTitle">الجدول الدوري <span>المبسّط</span></h2></div>
+        <div class="table-note"><span class="note-dot"></span><span data-i18n="tableNote">اضغط على أي عنصر لاستكشافه</span></div>
+      </div>
+      <div class="table-controls">
+        <label class="searchbox"><span class="search-icon">⌕</span><input id="searchInput" type="search" placeholder="ابحث بالاسم أو الرمز أو العدد الذري..." autocomplete="off" data-i18n-placeholder="searchPlaceholder"><kbd>⌘ K</kbd></label>
+        <button id="clearSearch" class="clear-search" type="button" data-i18n="clearSearch">مسح البحث</button>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="periodic-shell">
+        <div class="table-topline"><span data-i18n="atomicIndex">01 — 18 / ATOMIC INDEX</span><span data-i18n="selectHint">اختر عنصرًا لعرض البطاقة</span></div>
+        <div id="periodicTable" class="periodic-table" aria-label="Periodic table"></div>
+        <div class="table-foot"><span><b>NOTE</b> <span data-i18n="tableFoot">هذا عرض مبسّط للمجموعات الرئيسية في أول ثلاث دورات، وليس الجدول الكامل ذي 118 عنصرًا.</span></span><span class="foot-grid">PERIODIC M <i>✳</i></span></div>
+      </div>
+    </section>
+
+    <section class="detail-section" id="detailSection">
+      <div class="section-heading detail-heading">
+        <div><div class="section-kicker" data-i18n="profileKicker">ELEMENT PROFILE</div><h2 data-i18n-html="profileTitle">من الذرة إلى <span>العالم</span></h2></div>
+        <div class="detail-arrows"><button id="prevElement" aria-label="Previous element">←</button><button id="nextElement" aria-label="Next element">→</button></div>
+      </div>
+      <article id="elementDetail" class="detail-card" aria-live="polite"></article>
+    </section>
+
+    <section class="bottom-note">
+      <div class="note-symbol">i</div><div><strong data-i18n="scienceNoteTitle">ملاحظة علمية</strong><p data-i18n="scienceNote">التوزيع حسب الأغلفة هنا يوضح عدد الإلكترونات في كل غلاف للذرة المتعادلة. القيم المعروضة تعليمية، وتختلف بعض التفاصيل والكتل النظيرية باختلاف النظائر.</p></div>
+    </section>
+  </main>
+  <footer class="footer"><a class="footer-brand" href="#"><span class="brand-mark small">P<span>M</span></span><span>PERIODIC M</span></a><span data-i18n="footerLine">صُنع للتعلّم، وصُمّم للاستكشاف.</span><div class="footer-credits"><span class="made-by">MADE BY <b>MFZ</b> <i>✳</i></span><span class="teacher-credit" data-i18n="teacherCredit">تحت إشراف الأستاذة عزوزي شهرة</span></div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
